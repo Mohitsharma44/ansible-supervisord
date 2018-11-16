@@ -1,0 +1,9 @@
+---
+# handlers file for ansible-supervisord
+
+- name: Restart supervisor
+  service:
+    name: supervisord
+    state: restarted
+  become: yes
+  when: supervisor_started

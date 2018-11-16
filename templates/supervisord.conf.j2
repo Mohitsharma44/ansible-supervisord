@@ -1,0 +1,44 @@
+[supervisord]
+nodaemon = {{ supervisor_nodaemon }}
+childlogdir = {{ supervisor_log_dir }}
+user = {{ supervisor_user }}
+pidfile = /var/run/supervisord.pid
+
+{% if supervisor_unix_http_enable %}
+[unix_http_server]
+file = {{ supervisor_unix_sock_path }}
+chown = {{ supervisor_user }}
+{% if supervisor_unix_http_protect %}
+username = {{ supervisor_user }}
+password = {SHA}{{ supervisor_password|hash('sha1') }}
+{% endif %}
+
+[supervisorctl]
+serverurl = unix:///{{ supervisor_unix_sock_path }}
+{% if supervisor_unix_http_protect %}
+username = {{ supervisor_user }}
+password = {SHA}{{ supervisor_password|hash('sha1') }}
+{% endif %}
+{% endif -%}
+
+{%- if supervisor_inet_http_enable%}
+[inet_http_server]
+port = {{ supervisor_inet_http_port }}
+{% if supervisor_inet_http_protect %}
+username = {{ supervisor_user }}
+password = {SHA}{{ supervisor_password|hash('sha1') }}
+{% endif %}
+
+[supervisorctl]
+serverurl = http://localhost:{{ supervisor_inet_http_port }}
+{% if supervisor_inet_http_protect %}
+username = {{ supervisor_user }}
+password = {SHA}{{ supervisor_password|hash('sha1') }}
+{% endif %}
+{% endif %}
+
+[include]
+files = {{ supervisord_conf_dir }}/conf.d/*.conf
+
+[rpcinterface:supervisor]
+supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface

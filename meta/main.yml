@@ -1,0 +1,18 @@
+galaxy_info:
+  author: Mohit Sharma
+  description: Ansible role for installing and configuring supervisord
+  company: NYU CUSP Urban Observatory
+
+  license: MIT
+
+  min_ansible_version: 2.4
+
+  platforms:
+   - name: Ubuntu
+     versions:
+     - trusty
+
+  galaxy_tags:
+    - 'system'
+    - 'cusp'
+    - 'UO'
