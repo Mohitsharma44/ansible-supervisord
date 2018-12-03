@@ -3,10 +3,10 @@
 - name: Copy default supervisor config
   template:
     src: supervisord.conf.j2
-    dest: "{{ supervisor_conf_dir }}"
+    dest: "{{ supervisor_conf_dir }}/supervisord.conf"
     mode: 0644
   become: yes
-  notify: Restart supervisor
+  #notify: Restart supervisor
 
 - name: Copy program configs for supervisor
   template:
@@ -18,7 +18,7 @@
   with_items:
     - "{{ supervisor_programs }}"
   become: yes
-  notify: Restart supervisor
+  #notify: Restart supervisor
 
 - name: Copy supervisor init file (for non systemd systems)
   template:
@@ -39,4 +39,4 @@
     mode: 0755
   when: "ansible_service_mgr == 'systemd'"
   become: yes
-  notify: Restart supervisor
+  #notify: Restart supervisor

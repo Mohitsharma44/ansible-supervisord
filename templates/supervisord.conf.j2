@@ -6,7 +6,7 @@ pidfile = /var/run/supervisord.pid
 
 {% if supervisor_unix_http_enable %}
 [unix_http_server]
-file = {{ supervisor_unix_sock_path }}
+file = {{ supervisor_unix_http_sock_path }}
 chown = {{ supervisor_user }}
 {% if supervisor_unix_http_protect %}
 username = {{ supervisor_user }}
@@ -14,7 +14,7 @@ password = {SHA}{{ supervisor_password|hash('sha1') }}
 {% endif %}
 
 [supervisorctl]
-serverurl = unix:///{{ supervisor_unix_sock_path }}
+serverurl = unix:///{{ supervisor_unix_http_sock_path }}
 {% if supervisor_unix_http_protect %}
 username = {{ supervisor_user }}
 password = {SHA}{{ supervisor_password|hash('sha1') }}
@@ -38,7 +38,7 @@ password = {SHA}{{ supervisor_password|hash('sha1') }}
 {% endif %}
 
 [include]
-files = {{ supervisord_conf_dir }}/conf.d/*.conf
+files = {{ supervisor_conf_dir }}/conf.d/*.conf
 
 [rpcinterface:supervisor]
 supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface

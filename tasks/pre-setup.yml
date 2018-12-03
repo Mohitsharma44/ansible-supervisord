@@ -11,6 +11,14 @@
     name: supervisor
     state: present
     version: "{{ supervisor_version }}"
+  when: supervisor_version != 'latest'
+
+- name: Install supervisor
+  pip:
+    name: supervisor
+    state: present
+  become: yes
+  when: supervisor_version == 'latest'
 
 - name: Set upervisor log directory
   file:

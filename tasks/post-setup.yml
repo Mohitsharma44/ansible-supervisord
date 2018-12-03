@@ -1,15 +1,15 @@
 ---
 
-- name: Ensure supervisor is running (if configured)
-  service:
-    name: supervisord
-    state: started
-  when: supervisor_started
-  become: yes
+# - name: Ensure supervisor is running (if configured)
+#   service:
+#     name: supervisord
+#     state: started
+#   when: supervisor_started
+#   become: yes
 
-- name: Ensure supervisor is started at boot (if configured)
-  service:
-    name: supervisord
-    enabled: true
-  when: supervisor_enabled
-  become: yes
+# - name: Ensure supervisor is started at boot (if configured)
+#   service:
+#     name: supervisord
+#     enabled: true
+#   when: supervisor_enabled
+#   become: yes

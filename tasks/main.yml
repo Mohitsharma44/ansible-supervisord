@@ -1,2 +1,6 @@
 ---
 # tasks file for ansible-supervisord
+
+- include_tasks: pre-setup.yml
+- include_tasks: setup.yml
+- include_tasks: post-setup.yml
