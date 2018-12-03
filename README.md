@@ -1,12 +1,14 @@
 Role Name
 =========
 
+[![Build Status](https://travis-ci.org/Mohitsharma44/ansible-supervisord.svg?branch=master)](https://travis-ci.org/Mohitsharma44/ansible-supervisord)
+
 Asible Role for installing and configuring Supervisord
 
 Requirements
 ------------
 
-(To be verified)
+N/A
 
 Role Variables
 --------------
